@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const config = require('../config/auth.config')
+const config = require('../config/auth')
 const User = require('../schema/user')
 
 const signup = (req, res) => {
@@ -53,8 +53,16 @@ const signout = async (req, res) => {
   }
 }
 
+const caio = (req, res) => {
+  const {idade} = req.params
+  const dobroIdade = idade*2
+  return res.status(200).send({dobroIdade, idade})
+}
+
 module.exports = {
   signin,
   signout,
-  signup
+  signup,
+  caio
 }
+

@@ -1,32 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@ricardoasgs 
-grupoboticario
-/
-template-node-fastify-dynamodb
-Private template
-Code
-Issues
-Pull requests
-Actions
-Wiki
-Security
-Insights
-template-node-fastify-dynamodb/.editorconfig
-@wbruno
-wbruno fix: sonar
-…
-Latest commit d5275b3 on 5 Mar 2021
- History
- 1 contributor
-31 lines (25 sloc)  561 Bytes
-  
-# http://editorconfig.org
 root = true
 
 [*]
@@ -57,16 +28,3 @@ trim_trailing_whitespace = false
 [*.html]
 indent_style = space
 indent_size = 4
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
