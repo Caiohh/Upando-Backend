@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('./config/mongodb')
 
 const app = require('./app')
 

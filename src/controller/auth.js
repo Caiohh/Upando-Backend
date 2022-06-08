@@ -35,34 +35,16 @@ const signin = (req, res) => {
       expiresIn: 86400 // 24 hours
     })
 
-    req.session.token = token
     res.status(200).send({
       id: user._id,
       username: user.username,
-      email: user.email
+      email: user.email,
+      token
     })
   })
 }
 
-const signout = async (req, res) => {
-  try {
-    req.session = null
-    return res.status(200).send({ message: "You've been signed out!" })
-  } catch (err) {
-    this.next(err)
-  }
-}
-
-const caio = (req, res) => {
-  const {idade} = req.params
-  const dobroIdade = idade*2
-  return res.status(200).send({dobroIdade, idade})
-}
-
 module.exports = {
   signin,
-  signout,
-  signup,
-  caio
+  signup
 }
-
