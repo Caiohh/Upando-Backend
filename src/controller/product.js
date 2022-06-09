@@ -11,11 +11,16 @@ const getProduct = (req, res) => {
 
 //com uma função do objeto Product consigo deletar
 const deleteProduct = (req, res) => {
-    return res.code(200).send('OK')
+    Product.deleteOne((err, products) => {
+        if (err) {
+            return res.status(500).send({ message: err })
+        }
+        return res.send('Product has been deleted')
+      })
 }
 
 const postProduct = (req, res) => {
-const{sku,name,description,price}=req.body
+const{sku, name, description, price} = req.body
     const product = new Product({
         sku,
         name,
@@ -34,7 +39,21 @@ const{sku,name,description,price}=req.body
 
 //forma de consulta e edita ou consulta e edita ao mesmo tempo (delete moongose)
 const patchProduct = (req, res) => {
-    return res.code(200).send('OK')
+    const {sku, name, description, price} = req.body
+    const { id } = req.params;
+    Product.updateOne((err, products) => {
+        sku,
+        name,
+        description,
+        price
+    })
+
+    product.save((err, product) => {
+        if (err) {
+            return res.status(500).send({ message: err })
+        }
+        return res.send({ message: 'Product was updated successfully!' })
+      })
 }
 
 module.exports = {
