@@ -1,64 +1,60 @@
-const Product = require("../schema/product")
+const Product = require('../schema/product')
 
 const getProduct = (req, res) => {
-    Product.find((err, products) => {
-        if (err) {
-            return res.status(500).send({ message: err })
-        }
-        return res.send(products)
-      })
+  Product.find((err, products) => {
+    if (err) {
+      return res.status(500).send({ message: err })
+    }
+    return res.send(products)
+  })
 }
 
 //com uma função do objeto Product consigo deletar
 const deleteProduct = (req, res) => {
-    Product.deleteOne((err, products) => {
-        if (err) {
-            return res.status(500).send({ message: err })
-        }
-        return res.send('Product has been deleted')
-      })
+  Product.findOneAndDelete({ sku: req.params.sku }, (err, product) => {
+    if (err) {
+      return res.status(500).send({ message: err })
+    }
+
+    if (!product) return res.status(404).send({ message: 'Product doesnt exist' })
+
+    return res.send({ message: 'Product has been deleted' })
+  })
 }
 
 const postProduct = (req, res) => {
-const{sku, name, description, price} = req.body
-    const product = new Product({
-        sku,
-        name,
-        description,
-        price
-    })
+  const { sku, name, description, price } = req.body
+  const product = new Product({
+    sku,
+    name,
+    description,
+    price
+  })
 
-    product.save((err, product) => {
-        if (err) {
-            return res.status(500).send({ message: err })
-        }
-        return res.send({ message: 'Product was registered successfully!' })
-      })
-    }
+  product.save((err, product) => {
+    if (err) return res.status(500).send({ message: err })
 
+    return res.send({ message: 'Product was registered successfully!' })
+  })
+}
 
 //forma de consulta e edita ou consulta e edita ao mesmo tempo (delete moongose)
 const patchProduct = (req, res) => {
-    const {sku, name, description, price} = req.body
-    const { id } = req.params;
-    Product.updateOne((err, products) => {
-        sku,
-        name,
-        description,
-        price
-    })
+  const { sku, name, description, price } = req.body
+  const skuParam  = req.params.sku
 
-    product.save((err, product) => {
-        if (err) {
-            return res.status(500).send({ message: err })
-        }
-        return res.send({ message: 'Product was updated successfully!' })
-      })
+  if (sku != skuParam) return res.send({ message: 'o Sku informado é diferente do Sku passado como parametro' })
+
+  Product.findOneAndUpdate({ sku }, { name, description, price }, (err, product) => {
+    if (err) return res.status(500).send({ message: err })
+    if (!product) return res.status(404).send({ message: 'Product doesnt exists' })
+    return res.send({ message: 'Product was updated successfully!' })
+  })
 }
 
 module.exports = {
-    getProduct,
-    deleteProduct,
-    postProduct,
-    patchProduct
+  getProduct,
+  deleteProduct,
+  postProduct,
+  patchProduct
 }
