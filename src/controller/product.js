@@ -43,11 +43,13 @@ const patchProduct = (req, res) => {
   const { sku, name, description, price } = req.body
   const skuParam  = req.params.sku
 
-  if (sku != skuParam) return res.send({ message: 'o Sku informado é diferente do Sku passado como parametro' })
+  if (sku != skuParam) return res.send({ message: 'the Sku informed is different from the Sku passed as a parameter' }) //if arrumado
 
   Product.findOneAndUpdate({ sku }, { name, description, price }, (err, product) => {
-    if (err) return res.status(500).send({ message: err })
-    if (!product) return res.status(404).send({ message: 'Product doesnt exists' })
+    if (err) return res.status(500).send({ message: err }) //if arrumado
+
+    if (!product) return res.status(404).send({ message: 'Product doesnt exists' }) //if arrumado
+
     return res.send({ message: 'Product was updated successfully!' })
   })
 }
