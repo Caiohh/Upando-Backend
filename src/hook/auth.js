@@ -3,7 +3,6 @@ const config = require('../config/auth.js')
 const User = require('../schema/user')
 
 verifyToken = (req, res, next) => {
-  console.log(req.headers.authorization)
   const token = req.headers.authorization
   if (!token) {
     return res.status(403).send({ message: 'No token provided!' })
