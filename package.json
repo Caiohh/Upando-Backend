@@ -10,6 +10,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "16.15.0"
+  },
   "dependencies": {
     "@fastify/helmet": "^8.1.0",
     "bcryptjs": "^2.4.3",
